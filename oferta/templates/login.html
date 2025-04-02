@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-box">
+        <h2>Entrar na Conta</h2>
+        <p>Acede o sistema para gerar as ofertas formativas!</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+            </div>
+            <button type="submit" class="btn">Entrar</button>
+        </form>
+        <!-- <p>Não tem uma conta? <a href="{% url 'register' %}">Registe-se aqui</a>.</p> -->
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #ffffff;
+        color: #333333;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        padding-bottom: 50px;
+        /* Adiciona espaço para o footer fixo */
+    }
+
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 85vh;
+        background: linear-gradient(180deg, #ffffff, #0097a7);
+    }
+
+    .login-box {
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 100%;
+        max-width: 400px;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #0097a7;
+        font-size: 2em;
+        font-weight: bold;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        text-transform: uppercase;
+    }
+
+    p {
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        text-align: left;
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        color: #0097a7;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: #f4f4f4;
+        color: #333333;
+    }
+
+    .btn {
+        width: 100%;
+        background: #0097a7;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        background: #007c91;
+    }
+
+    a {
+        color: #0097a7;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        color: #007c91;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+{% endblock %}

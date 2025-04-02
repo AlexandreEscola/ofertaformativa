@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+{% if user.is_superuser %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Administração</h1>
+        <a href="{% url 'criar_oferta' %}" class="create-offer-button">Criar Nova Oferta</a>
+    </div>
+    <div class="ofertas">
+        {% for oferta in ofertas %}
+        <div class="oferta-card">
+            <h2>{{ oferta.nome }}</h2>
+            <p><strong>Descrição:</strong> {{ oferta.descricao }}</p>
+            <p><strong>Saídas Profissionais:</strong> {{ oferta.saidas_profissionais }}</p>
+            <p><strong>Carga Horária:</strong> {{ oferta.carga_horaria }} horas</p>
+            <p><strong>Disciplinas:</strong> {{ oferta.disciplinas }}</p>
+
+            <div class="offer-actions">
+                <a href="{% url 'editar_oferta' oferta.id %}" class="edit-offer-button">Editar</a>
+
+                <form action="{% url 'remover_oferta' oferta.id %}" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="remove-offer-button"
+                        onclick="return confirm('Tem certeza de que deseja remover esta oferta?');">Remover</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<div class="no-permission">
+    <h2>Você não tem permissão para aceder a esta página.</h2>
+    <p>Esta área é proibida a utilizadores. <a href="{% url 'home' %}">Voltar para a homepage</a></p>
+</div>
+{% endif %}
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #ffffff;
+        /* Fundo branco */
+        color: #333333;
+        /* Cor do texto em cinza escuro */
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .dashboard-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: calc(100vh - 50px);
+        /* Subtrai a altura do footer */
+        background: linear-gradient(180deg, #ffffff, #0097a7);
+        /* Azul ciano mais escuro */
+        padding: 60px 20px;
+        flex-grow: 1;
+    }
+
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #0097a7;
+        /* Azul ciano mais escuro */
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 2.5em;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .create-offer-button {
+        padding: 12px 24px;
+        background-color: #0097a7;
+        /* Azul ciano mais escuro */
+        color: #ffffff;
+        /* Texto branco */
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 1.1em;
+        transition: background-color 0.3s;
+    }
+
+    .ofertas {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        width: 100%;
+        max-width: 1200px;
+        margin-top: 30px;
+    }
+
+    .oferta-card {
+        background: #ffffff;
+        /* Fundo branco para o card */
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        transition: transform 0.3s, box-shadow 0.3s;
+        color: #333333;
+        /* Cor do texto mais escuro */
+    }
+
+    .oferta-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .oferta-card h2 {
+        color: #0097a7;
+        /* Azul ciano mais escuro */
+        font-size: 1.6em;
+        margin-bottom: 10px;
+    }
+
+    .oferta-card p {
+        color: #666666;
+        /* Cor do texto mais suave */
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+
+    .oferta-card p strong {
+        color: #0097a7;
+        /* Azul ciano mais escuro */
+    }
+
+    .offer-actions {
+        margin-top: 15px;
+    }
+
+    .edit-offer-button,
+    .remove-offer-button {
+        padding: 8px 15px;
+        font-size: 1em;
+        border-radius: 8px;
+        text-decoration: none;
+        margin-right: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .edit-offer-button {
+        background-color: #28a745;
+        /* Verde para editar */
+        color: white;
+    }
+
+    .edit-offer-button:hover {
+        background-color: #218838;
+    }
+
+    .remove-offer-button {
+        background-color: #c0392b;
+        /* Vermelho para remover */
+        color: white;
+        border: none;
+    }
+
+    .remove-offer-button:hover {
+        background-color: #e74c3c;
+    }
+
+    .no-permission {
+        text-align: center;
+        color: #333333;
+        /* Cor do texto mais escuro */
+        font-size: 1.2em;
+        margin-top: 50px;
+    }
+
+    .no-permission a {
+        color: #0097a7;
+        /* Azul ciano mais escuro */
+        text-decoration: none;
+    }
+
+    .no-permission a:hover {
+        text-decoration: underline;
+    }
+
+    a {
+        color: #0097a7;
+        /* Azul ciano mais escuro */
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        color: #ffffff;
+        /* Azul mais escuro */
+    }
+</style>
+
+{% endblock %}
