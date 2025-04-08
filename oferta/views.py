@@ -27,7 +27,7 @@ def home(request):
 @login_required
 def dashboard(request):
     if not request.user.is_superuser:
-        return HttpResponseForbidden("Você não tem permissão para acessar a página de administração.")
+        return HttpResponseForbidden("Você não tem permissão para aceder à página de administração.")
     
     ofertas = OfertaFormativa.objects.all()  # Ou a lógica que você usa para listar as ofertas
     return render(request, 'dashboard.html', {'ofertas': ofertas})
