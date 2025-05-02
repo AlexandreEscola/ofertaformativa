@@ -587,28 +587,28 @@
     </footer>
 
     <script>
-        //// Função para alternar o estado do dropdown
-        //function toggleDropdown() {
-        //    var dropdown = document.getElementById("dropdown-menu");
-        //
-        //    // Verifica se o menu está visível ou não, e alterna
-        //    if (dropdown.style.display === "block") {
-        //        dropdown.style.display = "none"; // Fecha o dropdown
-        //    } else {
-        //        dropdown.style.display = "block"; // Abre o dropdown
-        //    }
-        //}
-        //
-        //// Fecha o dropdown se clicar fora dele
-        //window.onclick = function (event) {
-        //    var dropdown = document.getElementById("dropdown-menu");
-        //    var userNameButton = document.querySelector(".user-name");
-        //
-        //    // Se clicar fora do dropdown e do botão de nome, fecha o dropdown
-        //    if (!userNameButton.contains(event.target) && !dropdown.contains(event.target)) {
-        //        dropdown.style.display = "none";
-        //    }
-        //}
+        // Função para alternar o estado do dropdown
+        function toggleDropdown() {
+            var dropdown = document.getElementById("dropdown-menu");
+        
+            // Verifica se o menu está visível ou não, e alterna
+            if (dropdown.style.display === "block") {
+                dropdown.style.display = "none"; // Fecha o dropdown
+            } else {
+                dropdown.style.display = "block"; // Abre o dropdown
+            }
+        }
+        
+        // Fecha o dropdown se clicar fora dele
+        window.onclick = function (event) {
+            var dropdown = document.getElementById("dropdown-menu");
+            var userNameButton = document.querySelector(".user-name");
+        
+            // Se clicar fora do dropdown e do botão de nome, fecha o dropdown
+            if (!userNameButton.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.style.display = "none";
+            }
+        }
     </script>
 </body>
 
